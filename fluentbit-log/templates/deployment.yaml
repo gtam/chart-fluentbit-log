@@ -38,6 +38,14 @@ spec:
               name: {{ .Release.Name }}
               key: azure_log_workspace_shared_key
 {{- end }}
+{{- if .Values.enableDatadogPlugin }}
+        env:
+        - name: FLUENTBIT_DATADOG_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}
+              key: datadog_api_key
+{{- end }}
         ports:
         - name: syslog
           protocol: TCP

@@ -4,7 +4,7 @@ namespace: neuvector
 image:
   registry: docker.io
   repository: fluent/fluent-bit
-  tag: 1.1.2
+  tag: 1.5.4
   imagePullPolicy: IfNotPresent
 
 resources:
@@ -21,10 +21,14 @@ azure_log_workspace_id: <WORKSPACE_ID>
 
 azure_log_workspace_shared_key: <WORKSPACE_SHARED_KEY>
 
+datadog_api_key: <DATADOG_API_KEY>
+
 enableSecret: false
 
-enableAzurePlugin: true
+enableAzurePlugin: false
 
-enableStandardOutput: false
+enableDatadogPlugin: false
+
+enableStandardOutput: true
 
 logLevel: info

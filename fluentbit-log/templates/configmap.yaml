@@ -30,6 +30,21 @@ data:
         Customer_ID ${FLUENTBIT_AZURE_CUSTOMER_ID}
         Shared_Key  ${FLUENTBIT_AZURE_SHARED_KEY}
 {{- end }}
+{{- if .Values.enableDatadogPlugin }}
+    @INCLUDE output-datadog.conf
+  output-datadog.conf: |
+    [OUTPUT]
+        Name              datadog
+        Match             *
+        Host              http-intake.logs.datadoghq.com
+        TLS               on
+        compress          gzip
+        apikey            ${FLUENTBIT_DATADOG_API_KEY}
+        dd_service        fluentbit
+        dd_source         fluentbit
+        dd_message_key    log
+        dd_tags           env:dev
+{{- end }}
   input-syslog-neuvector.conf: |
     [INPUT]
         Name   syslog
